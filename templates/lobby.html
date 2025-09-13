@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Lobby - Create/Join Room</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="card animate-fadeIn">
+    <div class="topbar">
+      <div><strong>Quiz Bot</strong></div>
+      <div class="nav"><a href="/">Home</a> <a href="/about">About</a></div>
+    </div>
+
+    <h1 class="center">Multiplayer Lobby</h1>
+    <p class="small center">Create a room or join with a code below.</p>
+
+    <div style="display:flex; gap:12px; margin-top:18px; justify-content:center;">
+      <form method="post" action="/create_room" style="display:inline-block;">
+        <label class="small">Pick domain:</label>
+        <select name="domain">
+          <option value="general">General</option>
+          <option value="tech">Tech</option>
+          <option value="movies">Movies</option>
+        </select>
+        <button class="btn-lobby multi" type="submit">Create Room</button>
+      </form>
+
+      <form method="get" action="/room" style="display:inline-block;">
+        <label class="small">Enter room code:</label>
+        <input name="code" placeholder="ROOM123" style="padding:8px; border-radius:8px; border:1px solid #ddd;">
+        <button class="btn-lobby single" formaction="/room_search" type="submit">Find Room</button>
+      </form>
+    </div>
+
+    <p class="small center" style="margin-top:14px;">After creating a room, copy the code and share with friends. They can join and take the quiz in the same room flow.</p>
+  </div>
+</body>
+</html>

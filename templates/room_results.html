@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Room Results</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="card animate-fadeIn">
+    <div class="topbar">
+      <div><strong>Quiz Bot - Room {{ code }}</strong></div>
+      <div class="nav"><a href="/">Home</a> <a href="/lobby">Lobby</a></div>
+    </div>
+
+    <h1 class="center">Room Results — Room {{ code }}</h1>
+
+    <h3>Leaderboard</h3>
+    <div>
+      {% for p in players %}
+        <div style="padding:8px; border-radius:8px; margin:6px 0; background:#f8fafc;">
+          <strong>{{ loop.index }}. {{ p.username }}</strong> — Score: <strong>{{ p.score }}</strong>
+          {% if not p.submitted %}<span style="color:#b91c1c; margin-left:10px;">(not submitted)</span>{% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if username %}
+      <h3 style="margin-top:12px;">Your Answers ({{ username }})</h3>
+      <div>
+        {% for d in details %}
+        <div class="result-card {% if d.is_correct %}correct{% else %}wrong{% endif %}">
+          <p style="font-weight:700;">{{ loop.index }}. {{ d.question | safe }}</p>
+          <p>Your: <strong>{{ d.selected | safe }}</strong></p>
+          <p>Correct: <strong>{{ d.correct | safe }}</strong></p>
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="small">Join and submit to view your details.</p>
+    {% endif %}
+
+    <div style="margin-top:18px;">
+      <a href="/room/{{ code }}" class="btn-lobby single">Room Page</a>
+      <a href="/lobby" class="btn-lobby multi">Back to Lobby</a>
+    </div>
+  </div>
+</body>
+</html>

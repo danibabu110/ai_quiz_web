@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Room Quiz</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="card animate-fadeIn">
+    <div class="topbar">
+      <div><strong>Quiz Bot - Room {{ code }}</strong></div>
+      <div class="nav"><a href="/">Home</a> <a href="/lobby">Lobby</a></div>
+    </div>
+
+    <h1 class="center">Room {{ code }} — Player: {{ username }}</h1>
+    <form method="post" action="/room/{{ code }}/submit">
+      <input type="hidden" name="username" value="{{ username }}">
+      {% for q in questions %}
+      <div style="margin-top:16px;">
+        <div class="question-text">{{ loop.index }}. {{ q.question | safe }}</div>
+        {% for opt in q.options %}
+        <label class="option">
+          <input type="radio" name="q{{ loop.index0 }}" value="{{ q.question | safe }}||{{ q.answer | safe }}||{{ opt | safe }}">
+          <span>{{ opt }}</span>
+        </label>
+        {% endfor %}
+      </div>
+      {% endfor %}
+
+      <div style="margin-top:18px;">
+        <button class="btn-submit" type="submit">Submit & View Results</button>
+      </div>
+    </form>
+  </div>
+
+<script>
+document.querySelectorAll('.option').forEach(label=>{
+  label.addEventListener('click', ()=>{
+    const parent = label.parentElement;
+    parent.querySelectorAll('.option').forEach(s=>s.classList.remove('selected','correct','wrong'));
+    label.classList.add('selected');
+    const input = label.querySelector('input');
+    const parts = input.value.split('||');
+    const correct = parts[1], selected = parts[2];
+    if(selected === correct) label.classList.add('correct');
+    else {
+      label.classList.add('wrong');
+      parent.querySelectorAll('.option').forEach(s=>{
+        const iv = s.querySelector('input');
+        if(iv && iv.value.split('||')[2] === correct) s.classList.add('correct');
+      });
+    }
+  });
+});
+</script>
+</body>
+</html>

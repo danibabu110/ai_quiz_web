@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Single Player Results</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="card animate-fadeIn">
+    <div class="topbar">
+      <div><strong>Quiz Bot</strong></div>
+      <div class="nav">
+        <a href="/">Home</a>
+        <a href="/lobby">Lobby</a>
+      </div>
+    </div>
+
+    <h1 class="center">Results</h1>
+    <p class="center small">Score: <strong>{{ score }}</strong> / <strong>{{ total }}</strong></p>
+
+    <div style="margin-top:16px;">
+      {% for r in results %}
+      <div class="result-card {% if r.is_correct %}correct{% else %}wrong{% endif %}">
+        <p style="font-weight:700;">{{ loop.index }}. {{ r.question | safe }}</p>
+        <p>Your answer: <strong>{{ r.selected | safe }}</strong></p>
+        <p>Correct: <strong>{{ r.correct | safe }}</strong></p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div style="margin-top:18px;">
+      <a href="/" class="btn-lobby single">Home</a>
+      <a href="/single_player_quiz?domain=general" class="btn-lobby single">Play General</a>
+    </div>
+  </div>
+</body>
+</html>

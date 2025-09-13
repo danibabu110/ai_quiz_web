@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Quiz Bot - Welcome</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="card animate-fadeIn">
+    <div class="topbar">
+      <div><strong>Quiz Bot</strong></div>
+      <div class="nav">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </div>
+
+    <h1 class="center">Welcome to Quiz Bot</h1>
+    <p class="center small">AI-powered, attractive UI quiz platform. Choose single player or create/join a multiplayer room.</p>
+
+    <div style="margin-top:20px; text-align:center;">
+      <a class="btn-lobby single" href="/single_player_quiz?domain=general">Single - General</a>
+      <a class="btn-lobby single" href="/single_player_quiz?domain=tech">Single - Tech</a>
+      <a class="btn-lobby single" href="/single_player_quiz?domain=movies">Single - Movies</a>
+    </div>
+
+    <hr style="margin:20px 0;">
+
+    <div style="text-align:center;">
+      <a class="btn-lobby multi" href="/lobby">Multi Player Lobby</a>
+    </div>
+  </div>
+</body>
+</html>
